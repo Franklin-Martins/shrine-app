@@ -8,3 +8,7 @@
 
 - [ ] Login
 - [ ] Home
+
+<div align="center">
+  <img src="assets/screenshot1.gif" alt="Imagem 1" width="400" />
+</div>
