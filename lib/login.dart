@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
             Column(
               children: [
                 Image.asset('assets/diamond.png'),
-                const Text('SHRINE')
+                Text('SHRINE', style: Theme.of(context).textTheme.headlineSmall,),
               ],
             ),
             const SizedBox(height: 120.0,),
@@ -32,6 +32,7 @@ class _LoginPageState extends State<LoginPage> {
                 filled: true
               ),
             ),
+            const SizedBox(height: 12.0,),
             TextField(
               controller: _passwordController,
               obscureText: true,
@@ -48,7 +49,10 @@ class _LoginPageState extends State<LoginPage> {
                     _usernameController.clear();
                     _passwordController.clear();
                   },
-                  child: const Text('CANCEL')
+                  style: TextButton.styleFrom(
+                    foregroundColor: Theme.of(context).colorScheme.secondary
+                  ),
+                  child: const Text('CANCEL'),
                 ),
                 ElevatedButton(
                   onPressed: (){
