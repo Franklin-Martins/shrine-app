@@ -50,6 +50,9 @@ class _LoginPageState extends State<LoginPage> {
                     _passwordController.clear();
                   },
                   style: TextButton.styleFrom(
+                    shape: const BeveledRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(7.0))
+                    ),
                     foregroundColor: Theme.of(context).colorScheme.secondary
                   ),
                   child: const Text('CANCEL'),
@@ -58,6 +61,12 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: (){
                     Navigator.pop(context);
                   },
+                  style: TextButton.styleFrom(
+                    elevation: 8.0,
+                    shape: const BeveledRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                    ),
+                  ),
                   child: const Text('NEXT')
                 ),
               ],

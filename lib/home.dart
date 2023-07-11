@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shrine/model/product.dart';
 import 'package:shrine/model/products_repository.dart';
+import 'package:shrine/supplemental/asymmetric_view.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -36,7 +37,8 @@ class HomePage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       product.name,
@@ -78,12 +80,7 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: GridView.count(
-        crossAxisCount: 2,
-        padding: const EdgeInsets.all(16.0),
-        childAspectRatio: 8.0/9.0,
-        children: _buildGridCards(context),
-      ),
+      body: AsymmetricView(products: ProductsRepository.loadProducts(Category.all)),
       resizeToAvoidBottomInset: false,
     );
   }
