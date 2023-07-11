@@ -4,6 +4,8 @@ import 'package:shrine/supplemental/cute_corners_border.dart';
 import 'home.dart';
 import 'login.dart';
 import 'colors.dart';
+import 'backdrop.dart';
+import './model/product.dart';
 
 class ShrineApp extends StatelessWidget {
   const ShrineApp({super.key});
@@ -16,7 +18,13 @@ class ShrineApp extends StatelessWidget {
       initialRoute: '/login',
       routes: {
         '/login': (BuildContext context)=> const LoginPage(),
-        '/':(BuildContext context) => const HomePage()
+        '/':(BuildContext context) => Backdrop(
+          currentCategory: Category.all,
+          backLayer: Container(color: kShrinePink100),
+          frontLayer: HomePage(),
+          frontTitle: Text('Shrine'),
+          backTitle: Text('Shrine'),
+        )
       },
       theme: _kShrineTheme,
     );

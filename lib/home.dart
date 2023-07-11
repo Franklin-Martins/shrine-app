@@ -62,26 +62,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('SHRINE'),
-        leading: IconButton(
-          onPressed: (){}, 
-          icon: const Icon(Icons.menu)
-        ),
-        actions: <Widget>[
-          IconButton(
-            onPressed: (){},
-            icon: const Icon(Icons.search, semanticLabel: 'search',),
-          ),
-          IconButton(
-            onPressed: (){},
-            icon: const Icon(Icons.tune, semanticLabel: 'filter',),
-          ),
-        ],
-      ),
-      body: AsymmetricView(products: ProductsRepository.loadProducts(Category.all)),
-      resizeToAvoidBottomInset: false,
-    );
+    return AsymmetricView(products: ProductsRepository.loadProducts(Category.all));
   }
 }
