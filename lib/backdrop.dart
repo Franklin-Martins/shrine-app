@@ -27,6 +27,17 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
   late AnimationController _controller;
 
   @override
+  void didUpdateWidget(Backdrop old){
+    super.didUpdateWidget(old);
+
+    if(widget.currentCategory != old.currentCategory){
+      _toggleBackdropLayerVisibility();
+    } else if(!_frontLayerVisible){
+      _controller.fling(velocity: _kFlingVelocity);
+    }
+  }
+
+  @override
   void initState() {
     super.initState();
     _controller = AnimationController(
@@ -67,12 +78,15 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
       key: _backdropKey,
       children: <Widget>[
         ExcludeSemantics(
-          child: widget.backLayer,
           excluding: _frontLayerVisible,
+          child: widget.backLayer,
         ),
         PositionedTransition(
           rect: layerAnimation,
-          child: _FrontLayer(child: widget.frontLayer)
+          child: _FrontLayer(
+            onTap: _toggleBackdropLayerVisibility,
+            child: widget.frontLayer
+          )
         ),
       ],
     );
@@ -111,8 +125,11 @@ const double _kFlingVelocity = 2.0;
 
 class _FrontLayer extends StatelessWidget {
   final Widget child;
+  final VoidCallback? onTap;
+  
   const _FrontLayer({
     required this.child,
+    this.onTap,
     Key? key
   }):super(key: key);
 
@@ -126,6 +143,14 @@ class _FrontLayer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: onTap,
+            child: Container(
+              height: 40.0,
+              alignment: AlignmentDirectional.centerStart,
+            ),
+          ),
           Expanded(child: child),
         ],
       ),

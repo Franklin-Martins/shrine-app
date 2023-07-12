@@ -6,9 +6,23 @@ import 'login.dart';
 import 'colors.dart';
 import 'backdrop.dart';
 import './model/product.dart';
+import './category_menu_page.dart';
 
-class ShrineApp extends StatelessWidget {
+class ShrineApp extends StatefulWidget {
   const ShrineApp({super.key});
+
+  @override
+  State<ShrineApp> createState() => _ShrineAppState();
+}
+
+class _ShrineAppState extends State<ShrineApp> {
+  Category _currentCategory = Category.all;
+
+  void _onCategoryTap(Category category){
+    setState(() {
+      _currentCategory = category;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +34,13 @@ class ShrineApp extends StatelessWidget {
         '/login': (BuildContext context)=> const LoginPage(),
         '/':(BuildContext context) => Backdrop(
           currentCategory: Category.all,
-          backLayer: Container(color: kShrinePink100),
-          frontLayer: HomePage(),
-          frontTitle: Text('Shrine'),
-          backTitle: Text('Shrine'),
+          backLayer: CategoryMenuPage(
+            currentCategory: _currentCategory, 
+            onCategoryTap: _onCategoryTap
+          ),
+          frontLayer: HomePage(category: _currentCategory),
+          frontTitle: const Text('Shrine'),
+          backTitle: const Text('Shrine'),
         )
       },
       theme: _kShrineTheme,
